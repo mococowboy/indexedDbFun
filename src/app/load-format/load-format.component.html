@@ -1,0 +1,6 @@
+<h2>Load Formats</h2>
+<p>The expected file format is <code>fips,state</code></p>
+<button (click)="getStates()">Get states</button>
+<ul *ngFor="let state of st">
+  <li>The FIPS is {{state.fips}} for the state {{state.name}}</li>
+</ul>

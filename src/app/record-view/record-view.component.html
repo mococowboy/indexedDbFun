@@ -1,0 +1,11 @@
+<nav>
+<!--  <button (click)="first()">FIRST</button>-->
+<!--  <button (click)="prev()">PREVIOUS</button>-->
+<!--  <button (click)="next()">NEXT</button>-->
+<!--  <button (click)="last()">LAST</button>-->
+</nav>
+
+<label for="states">State</label>
+<select id="states" [formControl]="userName">
+<option *ngFor="let state of states">{{state.name}}</option>
+</select>
