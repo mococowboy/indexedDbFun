@@ -1,27 +1,5 @@
 # LocalDemo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
+A demo in Angular pushing the bounderies of what's possible with current web technologies. 
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This demo can read a local file, perform some processing on it, and save it to a local IndexedDb instance via the Dexie library. A form is then created showing every value in a select control. The existing processing logic expects a comma seperated value with the first element being a fips code (01-76) and the second element being the state name, like this: 69,Northern Mariana Islands
