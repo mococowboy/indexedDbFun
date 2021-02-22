@@ -1,0 +1,6 @@
+<p>In the application that I work on, remote users upload files to a website and then view them. I wanted to see how much of that same use-case could be possible done locally.</p>
+<label for="fileUpload">Read a file:</label>
+<input type="file" [formControl]="fileForm"
+       id="fileUpload"
+       accept="text/*"
+       (change)="changeListener($event)" #input>
