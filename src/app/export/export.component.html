@@ -1,1 +1,10 @@
-<p>export works!</p>
+<p>This will be a form to allow users to choose the delimeter, any transforms, substitions, etc</p>
+<form [formGroup]="form">
+    <input type="radio" id="csv" name="delimiter" formControlName="delimiter" value="csv" checked/>
+  <label for="csv">Comma-Separated Values</label><br/>
+  <input type="radio" id="tab" name="delimiter" formControlName="delimiter" value="tab"/>
+  <label for="tab">Tab-Separated Values</label><br/>
+  <button>Export</button>
+</form>
+
+<p>{{form.value | json}}</p>
