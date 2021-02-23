@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import Dexie from 'dexie';
-import {from, Observable} from "rxjs";
+import {from, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class DexieService {
   constructor() {
     this.db = new StateDatabase();
     // @ts-ignore
-    this.firstObservable = from(this.db.state.toCollection().first())
+    this.firstObservable = from(this.db.state.toCollection().first());
   }
 
   getStates(): Observable<State[]> {
@@ -28,20 +28,20 @@ export class DexieService {
 }
 
 export interface State {
-  fips: string,
-  name: string
+  fips: string;
+  name: string;
 }
 
 export class StateDatabase extends Dexie {
   state: Dexie.Table<State, string>;
 
   constructor() {
-    super("db");
+    super('db');
     this.version(1).stores({
       state: '&fips,name'
-    })
+    });
 
-    this.state = this.table("state");
+    this.state = this.table('state');
 
     // this.state.bulkPut([
     //   {fips: '01', name: 'Alabama'},
