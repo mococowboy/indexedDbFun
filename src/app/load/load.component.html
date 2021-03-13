@@ -4,3 +4,13 @@
        id="fileUpload"
        accept="text/*"
        (change)="changeListener($event)" #input>
+
+<p>On the otherhand, if you want to clear the database of date, click teh button below</p>
+<button (click)="showDialog()">Clear</button>
+<dialog #confirm>
+  <p>
+    Are you sure?
+  </p>
+  <button (click)="clearDatabase()">Yes, delete all data</button>
+  <button (click)="closeDialog()">No, don't delete all data</button>
+</dialog>

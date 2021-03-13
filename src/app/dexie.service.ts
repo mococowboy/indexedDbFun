@@ -7,22 +7,22 @@ import {from, Observable} from 'rxjs';
 })
 export class DexieService {
 
-
   db: StateDatabase;
-  firstObservable: Observable<State>;
 
   constructor() {
     this.db = new StateDatabase();
-    // @ts-ignore
-    this.firstObservable = from(this.db.state.toCollection().first());
   }
 
   getStates(): Observable<State[]> {
     return from(this.db.state.toArray());
   }
 
-  bulkPut(stateFileArray: State[]) {
+  bulkPut(stateFileArray: State[]): void {
     this.db.state.bulkPut(stateFileArray);
+  }
+
+  clearStates(): void {
+    this.db.state.clear();
   }
 
 }
@@ -42,23 +42,6 @@ export class StateDatabase extends Dexie {
     });
 
     this.state = this.table('state');
-
-    // this.state.bulkPut([
-    //   {fips: '01', name: 'Alabama'},
-    //   {fips: '02', name: 'Alaska'},
-    //   {fips: '04', name: 'Arizona'},
-    //   {fips: '05', name: 'Arkansas'},
-    //   {fips: '06', name: 'California'},
-    //   {fips: '08', name: 'Colorado'},
-    //   {fips: '09', name: 'Connecticut'},
-    //   {fips: '10', name: 'Delaware'},
-    //   {fips: '11', name: 'District of Columbia'},
-    //   {fips: '12', name: 'Florida'},
-    //   {fips: '13', name: 'Georgia'},
-    //   {fips: '15', name: 'Hawaii'},
-    //   {fips: '16', name: 'Idaho'},
-    //   {fips: '17', name: 'Illinois'}
-    // ])
   }
 
 }

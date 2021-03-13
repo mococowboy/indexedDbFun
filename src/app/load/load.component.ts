@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
-import {FormControl} from "@angular/forms";
-import {DexieService} from "../dexie.service";
+import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {DexieService} from '../dexie.service';
 
 
 @Component({
@@ -10,13 +10,15 @@ import {DexieService} from "../dexie.service";
 })
 export class LoadComponent implements OnDestroy {
 
+  @ViewChild('confirm')
+  private dialogRef?: ElementRef;
   loadWorker: Worker;
   fileForm: FormControl;
   ds: DexieService;
 
   constructor(ds: DexieService) {
     this.ds = ds;
-    this.loadWorker = new Worker('./../load.worker', { type: 'module'})
+    this.loadWorker = new Worker('./../load.worker', { type: 'module'});
     this.fileForm = new FormControl();
   }
 
@@ -24,13 +26,25 @@ export class LoadComponent implements OnDestroy {
     this.loadWorker.terminate();
   }
 
+  showDialog(): void {
+    this.dialogRef?.nativeElement.showModal();
+  }
+
+  clearDatabase(): void {
+    this.ds.clearStates();
+    this.dialogRef?.nativeElement.close('close');
+  }
+
+  closeDialog(): void {
+    this.dialogRef?.nativeElement.close('close');
+  }
+
   changeListener(event: any): void {
-    let file = event.target.files[0];
+    const file = event.target.files[0];
     this.loadWorker.postMessage(file);
     this.loadWorker.onmessage = (data) => {
-      console.log(data)
       this.ds.bulkPut(data.data);
-    }
+    };
   }
 
 }
