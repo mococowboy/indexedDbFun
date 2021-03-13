@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl} from "@angular/forms";
-import {DexieService, State} from "../dexie.service";
+import {FormControl} from '@angular/forms';
+import {DexieService, State} from '../dexie.service';
 
 @Component({
   selector: 'app-record-view',
@@ -19,7 +19,11 @@ export class RecordViewComponent implements OnInit {
   states: State[] = [];
 
   first(): void {
+    this.ds.getFirst().subscribe(n => console.log(n));
+  }
 
+  last(): void {
+    this.ds.getLast().subscribe(n => console.log(n));
   }
 
   ngOnInit(): void {

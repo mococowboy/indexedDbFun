@@ -21,6 +21,16 @@ export class DexieService {
     this.db.state.bulkPut(stateFileArray);
   }
 
+  getFirst(): Observable<State> {
+    // @ts-ignore
+    return from(this.db.state.orderBy('fips').first());
+  }
+
+  getLast(): Observable<State> {
+    // @ts-ignore
+    return from(this.db.state.orderBy('fips').reverse().first());
+  }
+
   clearStates(): void {
     this.db.state.clear();
   }

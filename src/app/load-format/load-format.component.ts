@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {DexieService, State} from "../dexie.service";
-import {Observable} from "rxjs";
+import {DexieService, State} from '../dexie.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-load-format',
