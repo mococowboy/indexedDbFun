@@ -26,6 +26,14 @@ export class RecordViewComponent implements OnInit {
     this.ds.getLast().subscribe(n => console.log(n));
   }
 
+  prev(): void {
+    this.ds.getPrev('06').subscribe(n => console.log(n));
+  }
+
+  next(): void {
+    this.ds.getNext('24').subscribe(n => console.log(n));
+  }
+
   ngOnInit(): void {
     this.ds.getStates().subscribe(s => this.states = s);
   }

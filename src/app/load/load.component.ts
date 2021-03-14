@@ -32,7 +32,7 @@ export class LoadComponent implements OnDestroy {
 
   clearDatabase(): void {
     this.ds.clearStates();
-    this.dialogRef?.nativeElement.close('close');
+    this.closeDialog();
   }
 
   closeDialog(): void {

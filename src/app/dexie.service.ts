@@ -31,6 +31,14 @@ export class DexieService {
     return from(this.db.state.orderBy('fips').reverse().first());
   }
 
+  getNext(fips: string): Observable<any> {
+    return from(this.db.state.where('fips').above(fips).first());
+  }
+
+  getPrev(fips: string): Observable<any> {
+    return from(this.db.state.where('fips').below(fips).reverse().first());
+  }
+
   clearStates(): void {
     this.db.state.clear();
   }
