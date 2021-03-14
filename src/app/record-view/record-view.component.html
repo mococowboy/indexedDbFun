@@ -4,8 +4,5 @@
   <button (click)="next()">NEXT</button>
   <button (click)="last()">LAST</button>
 </nav>
-
-<label for="states">State</label>
-<select id="states" [formControl]="userName">
-<option *ngFor="let state of states">{{state.name}}</option>
-</select>
+<h2>{{currentState?.name}}</h2>
+<p *ngIf="currentState">The selected state is {{currentState?.name}} and their FIPS is {{currentState.fips}}</p>

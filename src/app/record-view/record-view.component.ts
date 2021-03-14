@@ -17,21 +17,34 @@ export class RecordViewComponent implements OnInit {
 
   userName = new FormControl();
   states: State[] = [];
+  currentState: State | any;
 
   first(): void {
-    this.ds.getFirst().subscribe(n => console.log(n));
+    this.ds.getFirst().subscribe(n => {
+      this.currentState = n;
+    });
   }
 
   last(): void {
-    this.ds.getLast().subscribe(n => console.log(n));
+    this.ds.getLast().subscribe(n => {
+      this.currentState = n;
+    });
   }
 
   prev(): void {
-    this.ds.getPrev('06').subscribe(n => console.log(n));
+    this.ds.getPrev(this.currentState?.fips).subscribe(n => {
+      if (n) {
+        this.currentState = n;
+      }
+    });
   }
 
   next(): void {
-    this.ds.getNext('24').subscribe(n => console.log(n));
+    this.ds.getNext(this.currentState?.fips).subscribe(n => {
+      if (n) {
+        this.currentState = n;
+      }
+    });
   }
 
   ngOnInit(): void {
