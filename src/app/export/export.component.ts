@@ -19,4 +19,17 @@ export class ExportComponent {
     export: new FormControl()
   });
 
+  exportFile(): void {
+    const a: HTMLAnchorElement = document.createElement('a');
+    let b: string[] = [];
+    this.ds.getStates().subscribe(c => b = c.map(s => s.fips + ' ' + s.name + '\n'),
+                             err => console.error(err),
+                          () => {
+                         a.href = URL.createObjectURL(new Blob(b, {type: 'text/plain'}));
+                         a.setAttribute('download', 'hello.txt');
+                         a.click();
+                         a.remove();
+                       });
+  }
+
 }

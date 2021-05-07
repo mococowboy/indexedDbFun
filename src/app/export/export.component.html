@@ -4,7 +4,7 @@
   <label for="csv">Comma-Separated Values</label><br/>
   <input type="radio" id="tab" name="delimiter" formControlName="delimiter" value="tab"/>
   <label for="tab">Tab-Separated Values</label><br/>
-  <button>Export</button>
 </form>
+<a (click)="exportFile()" download="file.txt" href="javascript:void(0)">Export</a>
 
 <p>{{form.value | json}}</p>
