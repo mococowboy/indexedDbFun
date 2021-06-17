@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {DexieService, State} from '../dexie.service';
-import {Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {DexieService} from '../dexie.service';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-load-format',
@@ -9,16 +9,30 @@ import {Observable} from 'rxjs';
 })
 export class LoadFormatComponent {
 
-  states: Observable<State[]>;
-  st: State[] = [];
   ds: DexieService;
+  fb: FormBuilder;
+  tokenGroup: FormGroup;
+  tokenArray: FormArray;
 
-  constructor(ds: DexieService) {
+  constructor(ds: DexieService, fb: FormBuilder) {
     this.ds = ds;
-    this.states = this.ds.getStates();
+    this.fb = fb;
+    this.tokenGroup = this.fb.group({
+      tokenName: [''],
+      tokenStart: [''],
+      tokenEnd: ['']
+    });
+
+    this.tokenArray = this.fb.array([
+      new FormControl('A'),
+      new FormControl('B')
+    ]);
   }
 
-  getStates(): void {
-    this.states.subscribe(s => this.st = s);
+  public addControlToArray(): void {
+    // find max value in array to increment by
+    const maxValue: string = this.tokenArray.controls.map(c => c.value).reduce((a, b) => a > b ? a : b);
+    this.tokenArray.push(new FormControl(String.fromCharCode(maxValue.charCodeAt(0) + 1)));
   }
+
 }

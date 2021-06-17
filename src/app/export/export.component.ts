@@ -22,7 +22,7 @@ export class ExportComponent {
   exportFile(): void {
     const a: HTMLAnchorElement = document.createElement('a');
     let b: string[] = [];
-    this.ds.getStates().subscribe(c => b = c.map(s => s.fips + ' ' + s.name + '\n'),
+    this.ds.states.subscribe(c => b = c.map(s => s.fips + ' ' + s.name + '\n'),
                              err => console.error(err),
                           () => {
                          a.href = URL.createObjectURL(new Blob(b, {type: 'text/plain'}));

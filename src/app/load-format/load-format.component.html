@@ -1,6 +1,14 @@
 <h2>Load Formats</h2>
-<p>The expected file format is <code>fips,state</code></p>
-<button (click)="getStates()">Get states</button>
-<ul *ngFor="let state of st">
-  <li>The FIPS is {{state.fips}} for the state {{state.name}}</li>
-</ul>
+<p>Form to add in the expected line tokens and how wide each token is.</p>
+<form [formGroup]="tokenGroup">
+  <input id="tokenName" type="text" autocomplete="off" formControlName="tokenName" >
+  <input id="tokenStart" type="number" formControlName="tokenStart" min="0">
+  <input id="tokenEnd" type="number" formControlName="tokenEnd" min="0">
+  <br/>
+  {{tokenGroup.value | json}}
+</form>
+<div *ngFor="let control of tokenArray.controls; index as i">
+  <input [formControl]="tokenArray.controls[i]"/>
+</div>
+
+<button (click)="addControlToArray()">Click me</button>
