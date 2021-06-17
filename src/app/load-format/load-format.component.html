@@ -1,14 +1,15 @@
 <h2>Load Formats</h2>
 <p>Form to add in the expected line tokens and how wide each token is.</p>
-<form [formGroup]="tokenGroup">
-  <input id="tokenName" type="text" autocomplete="off" formControlName="tokenName" >
-  <input id="tokenStart" type="number" formControlName="tokenStart" min="0">
-  <input id="tokenEnd" type="number" formControlName="tokenEnd" min="0">
-  <br/>
-  {{tokenGroup.value | json}}
-</form>
-<div *ngFor="let control of tokenArray.controls; index as i">
-  <input [formControl]="tokenArray.controls[i]"/>
-</div>
 
-<button (click)="addControlToArray()">Click me</button>
+<button (click)="addControlToArray()">Add Row</button>
+<button (click)="removeLastGroupFromArray()" [disabled]="tokenArray.length == 1">Remove Control</button>
+<form [formGroup]="tokenArray" *ngFor="let control of tokenArray.controls">
+  <ng-container [formGroup]="control">
+    <input formControlName="tokenName" autocomplete="off"/>
+    <input formControlName="tokenStart" type="number" min="0"/>
+    <input formControlName="tokenEnd" type="number" min="0"/>
+  </ng-container>
+
+</form>
+
+{{tokenArray?.value | json}}
