@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DexieService} from '../dexie.service';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-load-format',
@@ -10,12 +10,10 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 export class LoadFormatComponent {
 
   ds: DexieService;
-  fb: FormBuilder;
   tokenForm: FormGroup;
 
-  constructor(ds: DexieService, fb: FormBuilder) {
+  constructor(ds: DexieService) {
     this.ds = ds;
-    this.fb = fb;
 
     this.tokenForm = new FormGroup({
       formatName: new FormControl(''),
