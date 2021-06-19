@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {DexieService} from '../dexie.service';
-import {FormArray, FormBuilder} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-load-format',
@@ -11,27 +11,42 @@ export class LoadFormatComponent {
 
   ds: DexieService;
   fb: FormBuilder;
-  tokenArray: FormArray;
+  tokenForm: FormGroup;
 
   constructor(ds: DexieService, fb: FormBuilder) {
     this.ds = ds;
     this.fb = fb;
 
-    this.tokenArray = this.fb.array([
-      this.fb.group({
-        tokenName: [''], tokenStart: [''], tokenEnd: ['']
-      })
-    ]);
+    this.tokenForm = new FormGroup({
+      formatName: new FormControl(''),
+      tokenArray: new FormArray([
+        new FormGroup({
+          tokenName: new FormControl(''),
+          tokenStart: new FormControl(''),
+          tokenEnd: new FormControl('')
+        })
+      ])
+    });
   }
 
-  public removeLastGroupFromArray(): void {
-    this.tokenArray.removeAt(this.tokenArray.length - 1);
+  get formatName(): FormControl {
+    return this.tokenForm.get('formatName') as FormControl;
   }
 
-  public addControlToArray(): void {
-    this.tokenArray.push(      this.fb.group({
-      tokenName: [''], tokenStart: [''], tokenEnd: ['']
+  get tokenArray(): FormArray {
+    return this.tokenForm.get('tokenArray') as FormArray;
+  }
+
+  addFormGroupToArray(): void {
+    this.tokenArray.push(        new FormGroup({
+      tokenName: new FormControl(''),
+      tokenStart: new FormControl(''),
+      tokenEnd: new FormControl('')
     }));
+  }
+
+  removeFormGroup(): void {
+    this.tokenArray.removeAt(this.tokenArray.length - 1);
   }
 
 }
